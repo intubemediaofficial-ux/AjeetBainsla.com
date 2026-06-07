@@ -106,6 +106,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /* ---------- Hero Background Slider ---------- */
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  if (heroSlides.length > 1) {
+    let currentSlide = 0;
+    setInterval(() => {
+      heroSlides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % heroSlides.length;
+      heroSlides[currentSlide].classList.add('active');
+    }, 6000);
+  }
+
   /* ---------- Smooth Scroll for anchors ---------- */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
