@@ -97,7 +97,7 @@
     "username": "ajeet_bainsla",
     "show_feed": true
   },
-  "admin": {
-    "password_hash": ""
-  }
+  "instagram_posts": [
+    "https://www.instagram.com/reel/DDM3E5BiASg/"
+  ]
 }
