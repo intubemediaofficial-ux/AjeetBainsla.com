@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — Ajeet Bainsla CMS</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#d4a853;--gold-light:#e8c97a;--bg:#1a150d;--bg2:#211a10;--bg3:#2a2215;--bg4:#33291b;--text:#f5f0e6;--text2:#c4b99e;--border:rgba(212,168,83,.25);--danger:#e74c3c;--success:#2ecc71;--info:#3498db;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;}
+.login-box{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:48px 40px;max-width:420px;width:100%;text-align:center;}
+.login-box h1{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:8px;}
+.login-box h1 span{color:var(--gold);}
+.login-box p{color:var(--text2);margin-bottom:32px;font-size:.9rem;}
+.login-box input{width:100%;padding:14px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:1rem;margin-bottom:16px;outline:none;}
+.login-box input:focus{border-color:var(--gold);}
+.login-box button{width:100%;padding:14px;background:var(--gold);color:#1a150d;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:.3s;}
+.login-box button:hover{background:var(--gold-light);}
+.login-err{color:var(--danger);font-size:.85rem;margin-bottom:12px;display:none;}
+.dashboard{display:none;min-height:100vh;}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:240px;background:var(--bg2);border-right:1px solid var(--border);padding:20px 0;overflow-y:auto;z-index:100;}
+.sidebar-logo{padding:0 20px;margin-bottom:28px;font-family:'Playfair Display',serif;font-size:1.15rem;}
+.sidebar-logo span{color:var(--gold);}
+.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 20px;color:var(--text2);font-size:.82rem;font-weight:500;cursor:pointer;text-decoration:none;transition:.2s;border-right:3px solid transparent;}
+.sidebar-nav a:hover,.sidebar-nav a.active{background:rgba(212,168,83,.1);color:var(--gold);border-right-color:var(--gold);}
+.sidebar-nav a i{width:18px;text-align:center;font-size:.9rem;}
+.sidebar-bottom{position:absolute;bottom:12px;left:0;right:0;padding:0 20px;}
+.sidebar-bottom a{display:flex;align-items:center;gap:8px;color:var(--text2);font-size:.8rem;cursor:pointer;padding:5px 0;text-decoration:none;}
+.sidebar-bottom a:hover{color:var(--gold);}
+.main{margin-left:240px;padding:24px 28px;}
+.main-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px;}
+.main-header h2{font-family:'Playfair Display',serif;font-size:1.5rem;}
+.main-header h2 span{color:var(--gold);}
+.panel{display:none;}.panel.active{display:block;}
+.form-group{margin-bottom:16px;}
+.form-group label{display:block;font-size:.75rem;font-weight:600;color:var(--gold);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px;}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:.88rem;outline:none;font-family:'Inter',sans-serif;}
+.form-group textarea{min-height:90px;resize:vertical;}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--gold);}
+.btn{padding:10px 20px;border:none;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:6px;}
+.btn-gold{background:var(--gold);color:#1a150d;}.btn-gold:hover{background:var(--gold-light);}
+.btn-danger{background:var(--danger);color:#fff;}.btn-danger:hover{opacity:.85;}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text2);}.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.btn-sm{padding:6px 12px;font-size:.75rem;}
+.btn-info{background:var(--info);color:#fff;}
+.card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:14px;}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.card-header h3{font-size:1rem;font-weight:600;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.item-row{display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;margin-bottom:6px;}
+.item-row .item-content{flex:1;min-width:0;}
+.item-row .item-title{font-weight:600;margin-bottom:2px;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.item-row .item-sub{font-size:.78rem;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.item-actions{display:flex;gap:5px;flex-shrink:0;}
+.toast{position:fixed;top:16px;right:16px;padding:12px 20px;border-radius:8px;font-weight:500;font-size:.88rem;z-index:9999;display:none;animation:slideIn .3s;max-width:400px;}
+.toast.success{background:var(--success);color:#fff;}
+.toast.error{background:var(--danger);color:#fff;}
+.toast.info{background:var(--info);color:#fff;}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0;}to{transform:translateX(0);opacity:1;}}
+.save-status{font-size:.78rem;color:var(--text2);margin-right:8px;}
+.upload-zone{border:2px dashed var(--border);border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:.3s;position:relative;margin-bottom:12px;}
+.upload-zone:hover{border-color:var(--gold);background:rgba(212,168,83,.05);}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.upload-zone i{font-size:1.6rem;color:var(--gold);margin-bottom:6px;}
+.upload-zone p{color:var(--text2);font-size:.82rem;}
+.upload-progress{height:4px;background:var(--bg2);border-radius:2px;margin-top:8px;display:none;overflow:hidden;}
+.upload-progress-bar{height:100%;background:var(--gold);width:0;transition:width .3s;}
+.img-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:10px;}
+.img-card{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:1;border:1px solid var(--border);}
+.img-card img{width:100%;height:100%;object-fit:cover;}
+.img-card .img-del{position:absolute;top:4px;right:4px;background:var(--danger);color:#fff;border:none;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:.7rem;display:flex;align-items:center;justify-content:center;}
+.ig-embed-item{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:8px;display:flex;align-items:center;gap:12px;}
+.ig-embed-item .ig-url{flex:1;font-size:.82rem;color:var(--text2);word-break:break-all;}
+.ig-embed-item .ig-thumb{width:50px;height:50px;background:var(--bg3);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.2rem;}
+.github-setup{background:linear-gradient(135deg,rgba(212,168,83,.1),rgba(212,168,83,.05));border:1px solid var(--gold);border-radius:12px;padding:18px;margin-bottom:18px;}
+.github-setup h4{color:var(--gold);margin-bottom:8px;font-size:.9rem;}
+.github-setup p{font-size:.82rem;color:var(--text2);margin-bottom:10px;line-height:1.5;}
+.github-setup a{color:var(--gold);}
+.loading-overlay{position:fixed;inset:0;background:rgba(26,21,13,.85);display:flex;align-items:center;justify-content:center;z-index:10000;display:none;}
+.loading-overlay .spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+@media(max-width:768px){.sidebar{width:100%;height:auto;position:relative;border-right:none;border-bottom:1px solid var(--border);}.sidebar-bottom{position:static;padding:8px 20px;}.main{margin-left:0;}.grid-2,.grid-3{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="loading-overlay" id="loadingOverlay"><div class="spinner"></div></div>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginPage">
+<div class="login-box">
+  <h1>Ajeet <span>Bainsla</span></h1>
+  <p>Admin Panel — Content Management System</p>
+  <div class="login-err" id="loginErr"></div>
+  <input type="password" id="loginPw" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')doLogin()">
+  <button onclick="doLogin()"><i class="fas fa-lock"></i> Login</button>
+</div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard" id="dashboard">
+<aside class="sidebar">
+  <div class="sidebar-logo">Ajeet <span>Bainsla</span> CMS</div>
+  <nav class="sidebar-nav">
+    <a onclick="showPanel('hero')" class="active" data-p="hero"><i class="fas fa-home"></i> Hero Section</a>
+    <a onclick="showPanel('slider')" data-p="slider"><i class="fas fa-images"></i> Slider Photos</a>
+    <a onclick="showPanel('about')" data-p="about"><i class="fas fa-user"></i> About</a>
+    <a onclick="showPanel('journey')" data-p="journey"><i class="fas fa-road"></i> Journey</a>
+    <a onclick="showPanel('music')" data-p="music"><i class="fas fa-music"></i> Music</a>
+    <a onclick="showPanel('news')" data-p="news"><i class="fas fa-newspaper"></i> News Articles</a>
+    <a onclick="showPanel('gallery')" data-p="gallery"><i class="fas fa-photo-video"></i> Gallery</a>
+    <a onclick="showPanel('instagram')" data-p="instagram"><i class="fab fa-instagram"></i> Instagram Feed</a>
+    <a onclick="showPanel('contact')" data-p="contact"><i class="fas fa-address-book"></i> Contact</a>
+    <a onclick="showPanel('company')" data-p="company"><i class="fas fa-building"></i> Company</a>
+    <a onclick="showPanel('settings')" data-p="settings"><i class="fas fa-cog"></i> Settings</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <a href="/" target="_blank"><i class="fas fa-external-link-alt"></i> View Website</a>
+    <a onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </div>
+</aside>
+
+<main class="main">
+<div class="main-header">
+  <h2>Admin <span>Panel</span></h2>
+  <div style="display:flex;align-items:center;">
+    <span class="save-status" id="saveStatus"></span>
+    <button class="btn btn-gold" onclick="saveAll()" id="saveBtn"><i class="fas fa-save"></i> Save &amp; Publish</button>
+  </div>
+</div>
+
+<!-- GITHUB SETUP -->
+<div class="github-setup" id="githubSetup" style="display:none;">
+  <h4><i class="fas fa-key"></i> GitHub Token Setup (One Time)</h4>
+  <p>Changes save directly to your website via GitHub. Create a token at <a href="https://github.com/settings/tokens/new?scopes=repo&description=AjeetBainsla+Admin+Panel" target="_blank">GitHub Tokens Page</a> — select <b>"repo"</b> permission, then paste below.</p>
+  <div class="form-group"><label>GitHub Token</label><input id="ghToken" placeholder="ghp_xxxxxxxxxxxx"></div>
+  <button class="btn btn-gold btn-sm" onclick="saveGithubConfig()"><i class="fas fa-check"></i> Connect GitHub</button>
+</div>
+
+<!-- HERO -->
+<div class="panel active" id="panel-hero">
+<div class="card">
+  <div class="card-header"><h3><i class="fas fa-home"></i> Hero Section</h3></div>
+  <div class="form-group"><label>Subtitle</label><input id="h-subtitle"></div>
+  <div class="form-group"><label>Title</label><input id="h-title"></div>
+  <div class="form-group"><label>Tagline</label><input id="h-tagline"></div>
+  <div class="grid-3">
+    <div class="form-group"><label>Stat 1 Number</label><input id="h-s1n"></div>
+    <div class="form-group"><label>Stat 1 Suffix</label><input id="h-s1s"></div>
+    <div class="form-group"><label>Stat 1 Label</label><input id="h-s1l"></div>
+    <div class="form-group"><label>Stat 2 Number</label><input id="h-s2n"></div>
+    <div class="form-group"><label>Stat 2 Suffix</label><input id="h-s2s"></div>
+    <div class="form-group"><label>Stat 2 Label</label><input id="h-s2l"></div>
+    <div class="form-group"><label>Stat 3 Number</label><input id="h-s3n"></div>
+    <div class="form-group"><label>Stat 3 Suffix</label><input id="h-s3s"></div>
+    <div class="form-group"><label>Stat 3 Label</label><input id="h-s3l"></div>
+  </div>
+  <div class="form-group"><label>YouTube Channel URL</label><input id="h-yt"></div>
+</div>
+</div>
+
+<!-- SLIDER -->
+<div class="panel" id="panel-slider">
+<div class="card">
+  <div class="card-header"><h3><i class="fas fa-images"></i> Slider Photos</h3></div>
+  <p style="font-size:.82rem;color:var(--text2);margin-bottom:12px;">Upload photos for the hero background slider. Recommended: 1920x1080px or larger.</p>
+  <div class="upload-zone" id="sliderUpload">
+    <input type="file" accept="image/*" multiple onchange="uploadSliderPhotos(this.files)">
+    <i class="fas fa-cloud-upload-alt"></i>
+    <p>Click or drag photos here to upload</p>
+  </div>
+  <div class="upload-progress" id="sliderProgress"><div class="upload-progress-bar" id="sliderProgressBar"></div></div>
+  <div class="img-grid" id="sliderGrid"></div>
+</div>
+</div>
+
+<!-- ABOUT -->
+<div class="panel" id="panel-about">
+<div class="card">
+  <div class="card-header"><h3><i class="fas fa-user"></i> About Section</h3></div>
+  <div class="form-group"><label>Section Title (HTML allowed)</label><input id="a-title"></div>
+  <div class="form-group"><label>Paragraph 1 (HTML allowed)</label><textarea id="a-p1" rows="4"></textarea></div>
+  <div class="form-group"><label>Paragraph 2 (HTML allowed)</label><textarea id="a-p2" rows="4"></textarea></div>
+  <div class="form-group"><label>Paragraph 3 (HTML allowed)</label><textarea id="a-p3" rows="3"></textarea></div>
+  <div class="form-group"><label>Profile Image</label>
+    <div class="upload-zone" id="profileUpload">
+      <input type="file" accept="image/*" onchange="uploadProfilePhoto(this.files[0])">
+      <i class="fas fa-user-circle"></i>
+      <p>Upload profile photo</p>
+    </div>
+    <div id="profilePreview" style="margin-top:8px;"></div>
+  </div>
+</div>
+</div>
+
+<!-- JOURNEY -->
+<div class="panel" id="panel-journey">
+<div class="card">
+  <div class="card-header"><h3><i class="fas fa-road"></i> Journey Timeline</h3><button class="btn btn-gold btn-sm" onclick="addJourney()"><i class="fas fa-plus"></i> Add Entry</button></div>
+  <div id="journeyList"></div>
+</div>
+</div>
+
+<!-- MUSIC -->
+<div class="panel" id="panel-music">
+<div class="card">
+  <div class="card-header"><h3><i class="fas fa-music"></i> Music Section</h3></div>
+  <div class="grid-2">
+    <div class="form-group"><label>YouTube Channel URL</label><input id="m-yturl"></div>
+    <div class="form-group"><label>YouTube Channel Name</label><input id="m-ytname"></div>
+    <div class="form-group"><label>JioSaavn URL</label><input id="m-jsurl"></div>
+    <div class="form-group"><label>JioSaavn Description</label><input id="m-jsdesc"></div>
+    <div class="form-group"><label>Featured Video ID (YouTube)</label><input id="m-vid" placeholder="e.g. w6AcAzxe3cY"></div>
+    <div class="form-group"><label>Featured Video Title</label><input id="m-vtitle"></div>
+  </div>
+  <div class="form-group"><label>Genres (comma separated)</label><input id="m-genres" placeholder="Gurjar Rasiya, Devotional, Gurjar Languriya, Shekhawati, Rajasthani Song"></div>
+</div>
+</div>
+
+<!-- NEWS -->
+<div class="panel" id="panel-news">
+<div class="card">
+  <div class="card-header"><h3><i class="fas fa-newspaper"></i> News Articles</h3><button class="btn btn-gold btn-sm" onclick="addNews()"><i class="fas fa-plus"></i> Add Article</button></div>
+  <div id="newsList"></div>
+</div>
+</div>
+
+<!-- GALLERY -->
+<div class="panel" id="panel-gallery">
+<div class="card">
+  <div class="card-header"><h3><i class="fas fa-photo-video"></i> Photo Gallery</h3></div>
+  <p style="font-size:.82rem;color:var(--text2);margin-bottom:12px;">Upload photos to your gallery section on the website.</p>
+  <div class="upload-zone" id="galleryUpload">
+    <input type="file" accept="image/*" multiple onchange="uploadGalleryPhotos(this.files)">
+    <i class="fas fa-cloud-upload-alt"></i>
+    <p>Click or drag photos here to upload</p>
+  </div>
+  <div class="upload-progress" id="galleryProgress"><div class="upload-progress-bar" id="galleryProgressBar"></div></div>
+  <div class="img-grid" id="galleryGrid"></div>
+</div>
+</div>
+
+<!-- INSTAGRAM -->
+<div class="panel" id="panel-instagram">
+<div class="card">
+  <div class="card-header"><h3><i class="fab fa-instagram"></i> Instagram Feed</h3></div>
+  <div class="form-group"><label>Instagram Username</label><input id="ig-user" placeholder="ajeet_bainsla"></div>
+  <div class="form-group"><label>Show Instagram Section</label>
+    <select id="ig-feed"><option value="true">Yes</option><option value="false">No</option></select>
+  </div>
+  <hr style="border-color:var(--border);margin:16px 0;">
+  <div class="card-header"><h3>Instagram Post Embeds</h3><button class="btn btn-gold btn-sm" onclick="addIgPost()"><i class="fas fa-plus"></i> Add Post/Reel</button></div>
+  <p style="font-size:.82rem;color:var(--text2);margin-bottom:12px;">Paste Instagram post or reel URLs below. They will be embedded on your website and auto-update. When you post a new reel/photo on Instagram, just add its URL here!</p>
+  <div id="igPostsList"></div>
+</div>
+</div>
+
+<!-- CONTACT -->
+<div class="panel" id="panel-contact">
+<div class="card">
+  <div class="card-header"><h3><i class="fas fa-address-book"></i> Contact Info</h3></div>
+  <div class="grid-2">
+    <div class="form-group"><label>WhatsApp Number</label><input id="c-wa"></div>
+    <div class="form-group"><label>Facebook URL</label><input id="c-fburl"></div>
+    <div class="form-group"><label>Facebook Label</label><input id="c-fblbl"></div>
+    <div class="form-group"><label>Instagram URL</label><input id="c-igurl"></div>
+    <div class="form-group"><label>Instagram Label</label><input id="c-iglbl"></div>
+    <div class="form-group"><label>LinkedIn URL</label><input id="c-liurl"></div>
+    <div class="form-group"><label>LinkedIn Label</label><input id="c-lilbl"></div>
+    <div class="form-group"><label>Email 1</label><input id="c-e1"></div>
+    <div class="form-group"><label>Email 2</label><input id="c-e2"></div>
+  </div>
+</div>
+</div>
+
+<!-- COMPANY -->
+<div class="panel" id="panel-company">
+<div class="card">
+  <div class="card-header"><h3><i class="fas fa-building"></i> Company Info</h3></div>
+  <div class="form-group"><label>Company Name</label><input id="co-name"></div>
+  <div class="form-group"><label>Description 1 (HTML)</label><textarea id="co-d1" rows="4"></textarea></div>
+  <div class="form-group"><label>Description 2 (HTML)</label><textarea id="co-d2" rows="4"></textarea></div>
+  <div class="form-group"><label>Directors</label><input id="co-dir"></div>
+  <div class="form-group"><label>Address</label><input id="co-addr"></div>
+  <div class="form-group"><label>Website URL</label><input id="co-web"></div>
+</div>
+</div>
+
+<!-- SETTINGS -->
+<div class="panel" id="panel-settings">
+<div class="card">
+  <div class="card-header"><h3><i class="fas fa-cog"></i> Settings</h3></div>
+  <h4 style="margin-bottom:12px;font-size:.9rem;">Change Password</h4>
+  <div class="grid-2">
+    <div class="form-group"><label>New Password</label><input type="password" id="s-newpw" placeholder="Min 4 characters"></div>
+    <div class="form-group"><label>Confirm Password</label><input type="password" id="s-confirmpw" placeholder="Confirm"></div>
+  </div>
+  <button class="btn btn-gold btn-sm" onclick="changePw()"><i class="fas fa-key"></i> Change Password</button>
+  <hr style="border-color:var(--border);margin:20px 0;">
+  <h4 style="margin-bottom:12px;font-size:.9rem;">GitHub Connection</h4>
+  <p style="font-size:.8rem;color:var(--text2);margin-bottom:10px;">Your changes save to GitHub and automatically go live on ajeetbainsla.com</p>
+  <div class="grid-2">
+    <div class="form-group"><label>GitHub Token</label><input id="s-ghtoken" placeholder="ghp_xxxxxxxxxxxx" type="password"></div>
+    <div class="form-group"><label>Repository</label><input id="s-ghrepo" value="intubemediaofficial-ux/AjeetBainsla.com"></div>
+  </div>
+  <button class="btn btn-gold btn-sm" onclick="saveGhSettings()"><i class="fas fa-save"></i> Update GitHub Config</button>
+</div>
+</div>
+
+</main>
+</div>
+
+<script>
+let DATA={};
+const PW_KEY='ajb_admin_pw';
+const GH_TOK='ajb_gh_token';
+const GH_REPO='ajb_gh_repo';
+const GH_BR='ajb_gh_branch';
+const REPO_DEFAULT='intubemediaofficial-ux/AjeetBainsla.com';
+const BRANCH_DEFAULT='main';
+
+function $(id){return document.getElementById(id);}
+function toast(m,type='success'){const t=$('toast');t.textContent=m;t.className='toast '+type;t.style.display='block';setTimeout(()=>t.style.display='none',4000);}
+function showLoading(v){$('loadingOverlay').style.display=v?'flex':'none';}
+function showPanel(n){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.sidebar-nav a').forEach(a=>a.classList.remove('active'));$('panel-'+n).classList.add('active');const nav=document.querySelector(`[data-p="${n}"]`);if(nav)nav.classList.add('active');}
+
+// Password hashing
+async function hashPw(pw){const enc=new TextEncoder().encode(pw+'ajeetbainsla-cms-2025');const h=await crypto.subtle.digest('SHA-256',enc);return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('');}
+
+// Login
+async function doLogin(){
+  const pw=$('loginPw').value;if(!pw){$('loginErr').textContent='Enter password';$('loginErr').style.display='block';return;}
+  const stored=localStorage.getItem(PW_KEY);
+  const hashed=await hashPw(pw);
+  if(!stored){
+    if(pw.length<4){$('loginErr').textContent='Min 4 characters';$('loginErr').style.display='block';return;}
+    localStorage.setItem(PW_KEY,hashed);
+    enterDashboard();toast('Password set! Welcome!');return;
+  }
+  if(hashed===stored){enterDashboard();toast('Welcome back!');
+  }else{$('loginErr').textContent='Wrong password!';$('loginErr').style.display='block';}
+}
+function enterDashboard(){sessionStorage.setItem('ajb_in','1');$('loginPage').style.display='none';$('dashboard').style.display='block';loadData();}
+function doLogout(){sessionStorage.removeItem('ajb_in');location.reload();}
+if(sessionStorage.getItem('ajb_in')==='1'&&localStorage.getItem(PW_KEY)){$('loginPage').style.display='none';$('dashboard').style.display='block';loadData();}
+
+// GitHub helpers
+function ghToken(){return localStorage.getItem(GH_TOK)||'';}
+function ghRepo(){return localStorage.getItem(GH_REPO)||REPO_DEFAULT;}
+function ghBranch(){return localStorage.getItem(GH_BR)||BRANCH_DEFAULT;}
+function ghHeaders(){return{'Authorization':'token '+ghToken(),'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'};}
+
+// Load data
+async function loadData(){
+  try{const r=await fetch('../site-data.json?t='+Date.now());DATA=await r.json();}catch(e){DATA={};}
+  if(!DATA.instagram_posts)DATA.instagram_posts=[];
+  if(!DATA.gallery)DATA.gallery=[];
+  populateForm();
+  if(!ghToken())$('githubSetup').style.display='block';else $('githubSetup').style.display='none';
+  $('s-ghtoken').value=ghToken();$('s-ghrepo').value=ghRepo();
+}
+
+function populateForm(){
+  const h=DATA.hero||{};
+  $('h-subtitle').value=h.subtitle||'';$('h-title').value=h.title||'';$('h-tagline').value=h.tagline||'';$('h-yt').value=h.youtube_url||'';
+  const s=h.stats||[];
+  if(s[0]){$('h-s1n').value=s[0].number||'';$('h-s1s').value=s[0].suffix||'';$('h-s1l').value=s[0].label||'';}
+  if(s[1]){$('h-s2n').value=s[1].number||'';$('h-s2s').value=s[1].suffix||'';$('h-s2l').value=s[1].label||'';}
+  if(s[2]){$('h-s3n').value=s[2].number||'';$('h-s3s').value=s[2].suffix||'';$('h-s3l').value=s[2].label||'';}
+  renderSlider();
+  const a=DATA.about||{};
+  $('a-title').value=a.title||'';
+  const pp=a.paragraphs||[];$('a-p1').value=pp[0]||'';$('a-p2').value=pp[1]||'';$('a-p3').value=pp[2]||'';
+  if(a.profile_image)$('profilePreview').innerHTML=`<img src="../${a.profile_image}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);">`;
+  renderJourney();
+  const m=DATA.music||{};
+  $('m-yturl').value=m.youtube_channel_url||'';$('m-ytname').value=m.youtube_channel_name||'';
+  $('m-jsurl').value=m.jiosaavn_url||'';$('m-jsdesc').value=m.jiosaavn_description||'';
+  $('m-vid').value=m.featured_video_id||'';$('m-vtitle').value=m.featured_video_title||'';
+  $('m-genres').value=(m.genres||[]).map(g=>g.name).join(', ');
+  renderNews();renderGallery();renderIgPosts();
+  const c=DATA.contact||{};
+  $('c-wa').value=c.whatsapp||'';$('c-fburl').value=c.facebook_url||'';$('c-fblbl').value=c.facebook_label||'';
+  $('c-igurl').value=c.instagram_url||'';$('c-iglbl').value=c.instagram_label||'';
+  $('c-liurl').value=c.linkedin_url||'';$('c-lilbl').value=c.linkedin_label||'';
+  $('c-e1').value=c.email1||'';$('c-e2').value=c.email2||'';
+  const co=DATA.company||{};
+  $('co-name').value=co.name||'';$('co-d1').value=co.description1||'';$('co-d2').value=co.description2||'';
+  $('co-dir').value=co.directors||'';$('co-addr').value=co.address||'';$('co-web').value=co.website||'';
+  const ig=DATA.instagram||{};
+  $('ig-user').value=ig.username||'';$('ig-feed').value=String(ig.show_feed!==false);
+}
+
+function collectData(){
+  const icons=['fas fa-music','fas fa-pray','fas fa-drum','fas fa-guitar','fas fa-microphone-alt','fas fa-headphones','fas fa-record-vinyl'];
+  const genres=$('m-genres').value.split(',').map((g,i)=>({icon:icons[i%icons.length],name:g.trim()})).filter(g=>g.name);
+  DATA.hero={subtitle:$('h-subtitle').value,title:$('h-title').value,tagline:$('h-tagline').value,youtube_url:$('h-yt').value,
+    stats:[{number:$('h-s1n').value,suffix:$('h-s1s').value,label:$('h-s1l').value},{number:$('h-s2n').value,suffix:$('h-s2s').value,label:$('h-s2l').value},{number:$('h-s3n').value,suffix:$('h-s3s').value,label:$('h-s3l').value}],
+    slider_images:DATA.hero?.slider_images||[]};
+  DATA.about={title:$('a-title').value,profile_image:DATA.about?.profile_image||'assets/images/profile.jpg',paragraphs:[$('a-p1').value,$('a-p2').value,$('a-p3').value],highlights:DATA.about?.highlights||[]};
+  DATA.music={youtube_channel_url:$('m-yturl').value,youtube_channel_name:$('m-ytname').value,jiosaavn_url:$('m-jsurl').value,jiosaavn_description:$('m-jsdesc').value,featured_video_id:$('m-vid').value,featured_video_title:$('m-vtitle').value,genres};
+  DATA.contact={whatsapp:$('c-wa').value,facebook_url:$('c-fburl').value,facebook_label:$('c-fblbl').value,instagram_url:$('c-igurl').value,instagram_label:$('c-iglbl').value,linkedin_url:$('c-liurl').value,linkedin_label:$('c-lilbl').value,email1:$('c-e1').value,email2:$('c-e2').value};
+  DATA.company={name:$('co-name').value,description1:$('co-d1').value,description2:$('co-d2').value,directors:$('co-dir').value,address:$('co-addr').value,website:$('co-web').value};
+  DATA.instagram={username:$('ig-user').value,show_feed:$('ig-feed').value==='true'};
+}
+
+// Slider
+function renderSlider(){
+  const imgs=DATA.hero?.slider_images||[];
+  $('sliderGrid').innerHTML=imgs.map((src,i)=>`<div class="img-card"><img src="../${src}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1 1%22><rect fill=%22%232a2215%22 width=%221%22 height=%221%22/></svg>'"><button class="img-del" onclick="delSlider(${i})"><i class="fas fa-times"></i></button></div>`).join('');
+}
+function delSlider(i){if(!confirm('Delete this slider photo?'))return;DATA.hero.slider_images.splice(i,1);renderSlider();toast('Removed! Click Save to publish.');}
+
+// Gallery
+function renderGallery(){
+  const imgs=DATA.gallery||[];
+  $('galleryGrid').innerHTML=imgs.map((src,i)=>`<div class="img-card"><img src="../${src}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1 1%22><rect fill=%22%232a2215%22 width=%221%22 height=%221%22/></svg>'"><button class="img-del" onclick="delGallery(${i})"><i class="fas fa-times"></i></button></div>`).join('');
+}
+function delGallery(i){if(!confirm('Delete?'))return;DATA.gallery.splice(i,1);renderGallery();toast('Removed!');}
+
+// Image upload via GitHub API
+async function uploadToGitHub(file,folder){
+  if(!ghToken()){toast('Set up GitHub token first!','error');return null;}
+  const ext=file.name.split('.').pop().toLowerCase();
+  const name=Date.now()+'_'+Math.random().toString(36).substring(2,8)+'.'+ext;
+  const path=folder+'/'+name;
+  const reader=new FileReader();
+  return new Promise((resolve,reject)=>{
+    reader.onload=async function(){
+      const b64=reader.result.split(',')[1];
+      try{
+        const res=await fetch(`https://api.github.com/repos/${ghRepo()}/contents/${path}`,{method:'PUT',headers:ghHeaders(),body:JSON.stringify({message:'Upload '+name,content:b64,branch:ghBranch()})});
+        if(!res.ok)throw new Error((await res.json()).message||'Upload failed');
+        resolve(path);
+      }catch(e){reject(e);}
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+async function uploadSliderPhotos(files){
+  if(!files.length)return;
+  if(!ghToken()){toast('Set up GitHub token first!','error');$('githubSetup').style.display='block';return;}
+  const prog=$('sliderProgress'),bar=$('sliderProgressBar');
+  prog.style.display='block';bar.style.width='0%';
+  if(!DATA.hero)DATA.hero={};if(!DATA.hero.slider_images)DATA.hero.slider_images=[];
+  for(let i=0;i<files.length;i++){
+    bar.style.width=((i+1)/files.length*100)+'%';
+    try{
+      const path=await uploadToGitHub(files[i],'assets/uploads');
+      if(path)DATA.hero.slider_images.push(path);
+      toast(`Uploaded ${i+1}/${files.length}`);
+    }catch(e){toast('Upload error: '+e.message,'error');}
+  }
+  renderSlider();prog.style.display='none';
+  toast('Slider photos uploaded! Click Save & Publish.');
+}
+
+async function uploadGalleryPhotos(files){
+  if(!files.length)return;
+  if(!ghToken()){toast('Set up GitHub token first!','error');$('githubSetup').style.display='block';return;}
+  const prog=$('galleryProgress'),bar=$('galleryProgressBar');
+  prog.style.display='block';bar.style.width='0%';
+  if(!DATA.gallery)DATA.gallery=[];
+  for(let i=0;i<files.length;i++){
+    bar.style.width=((i+1)/files.length*100)+'%';
+    try{
+      const path=await uploadToGitHub(files[i],'assets/uploads');
+      if(path)DATA.gallery.push(path);
+      toast(`Uploaded ${i+1}/${files.length}`);
+    }catch(e){toast('Upload error: '+e.message,'error');}
+  }
+  renderGallery();prog.style.display='none';
+  toast('Gallery photos uploaded! Click Save & Publish.');
+}
+
+async function uploadProfilePhoto(file){
+  if(!file)return;
+  if(!ghToken()){toast('Set up GitHub token first!','error');$('githubSetup').style.display='block';return;}
+  showLoading(true);
+  try{
+    const path=await uploadToGitHub(file,'assets/uploads');
+    if(path){
+      if(!DATA.about)DATA.about={};
+      DATA.about.profile_image=path;
+      $('profilePreview').innerHTML=`<img src="../${path}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);">`;
+      toast('Profile photo uploaded! Click Save & Publish.');
+    }
+  }catch(e){toast('Upload error: '+e.message,'error');}
+  showLoading(false);
+}
+
+// Journey
+function renderJourney(){
+  const items=DATA.journey||[];
+  $('journeyList').innerHTML=items.length?items.map((j,i)=>`<div class="item-row">
+    <div style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--gold);min-width:48px;">${j.year}</div>
+    <div class="item-content"><div class="item-title">${j.title}</div><div class="item-sub">${(j.description||'').substring(0,65)}...</div></div>
+    <div class="item-actions"><button class="btn btn-outline btn-sm" onclick="editJourney(${i})" title="Edit"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm" onclick="delJourney(${i})" title="Delete"><i class="fas fa-trash"></i></button></div>
+  </div>`).join(''):'<p style="color:var(--text2);font-size:.85rem;">No entries yet.</p>';
+}
+function addJourney(){const y=prompt('Year:');if(!y)return;const t=prompt('Title:');if(!t)return;const d=prompt('Description:');if(!d)return;if(!DATA.journey)DATA.journey=[];DATA.journey.push({year:y,title:t,description:d});renderJourney();toast('Added! Click Save to publish.');}
+function editJourney(i){const j=DATA.journey[i];const y=prompt('Year:',j.year);if(!y)return;const t=prompt('Title:',j.title);if(!t)return;const d=prompt('Description:',j.description);if(!d)return;DATA.journey[i]={year:y,title:t,description:d};renderJourney();toast('Updated!');}
+function delJourney(i){if(!confirm('Delete this entry?'))return;DATA.journey.splice(i,1);renderJourney();toast('Deleted!');}
+
+// News
+function renderNews(){
+  const items=DATA.news||[];
+  $('newsList').innerHTML=items.length?items.map((n,i)=>`<div class="item-row">
+    <div style="min-width:70px;font-weight:600;color:var(--gold);font-size:.72rem;text-transform:uppercase;">${n.outlet}</div>
+    <div class="item-content"><div class="item-title">${(n.title||'').substring(0,50)}...</div><div class="item-sub">${n.date||''}</div></div>
+    <div class="item-actions"><button class="btn btn-outline btn-sm" onclick="editNews(${i})"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm" onclick="delNews(${i})"><i class="fas fa-trash"></i></button></div>
+  </div>`).join(''):'<p style="color:var(--text2);font-size:.85rem;">No articles yet.</p>';
+}
+function addNews(){const o=prompt('News Outlet (e.g. Times of India):');if(!o)return;const t=prompt('Article Title:');if(!t)return;const d=prompt('Description:');if(!d)return;const u=prompt('Article URL:');if(!u)return;const dt=prompt('Date (e.g. December 2024):')||'';if(!DATA.news)DATA.news=[];DATA.news.push({outlet:o,title:t,description:d,url:u,date:dt});renderNews();toast('Added!');}
+function editNews(i){const n=DATA.news[i];const o=prompt('Outlet:',n.outlet);if(!o)return;const t=prompt('Title:',n.title);if(!t)return;const d=prompt('Description:',n.description);if(!d)return;const u=prompt('URL:',n.url);if(!u)return;const dt=prompt('Date:',n.date)||'';DATA.news[i]={outlet:o,title:t,description:d,url:u,date:dt};renderNews();toast('Updated!');}
+function delNews(i){if(!confirm('Delete?'))return;DATA.news.splice(i,1);renderNews();toast('Deleted!');}
+
+// Instagram posts
+function renderIgPosts(){
+  const items=DATA.instagram_posts||[];
+  $('igPostsList').innerHTML=items.length?items.map((url,i)=>`<div class="ig-embed-item">
+    <div class="ig-thumb"><i class="fab fa-instagram"></i></div>
+    <div class="ig-url">${url}</div>
+    <button class="btn btn-danger btn-sm" onclick="delIgPost(${i})"><i class="fas fa-trash"></i></button>
+  </div>`).join(''):'<p style="color:var(--text2);font-size:.85rem;">No posts added yet. Add Instagram post/reel URLs to embed them on your website.</p>';
+}
+function addIgPost(){const u=prompt('Paste Instagram Post or Reel URL:');if(!u)return;if(!u.includes('instagram.com')){toast('Invalid Instagram URL!','error');return;}if(!DATA.instagram_posts)DATA.instagram_posts=[];DATA.instagram_posts.unshift(u.split('?')[0]);renderIgPosts();toast('Added! Click Save to publish.');}
+function delIgPost(i){if(!confirm('Remove?'))return;DATA.instagram_posts.splice(i,1);renderIgPosts();toast('Removed!');}
+
+// Password
+async function changePw(){
+  const np=$('s-newpw').value,cp=$('s-confirmpw').value;
+  if(np!==cp){toast('Passwords do not match!','error');return;}
+  if(np.length<4){toast('Min 4 characters!','error');return;}
+  localStorage.setItem(PW_KEY,await hashPw(np));
+  toast('Password changed!');$('s-newpw').value='';$('s-confirmpw').value='';
+}
+
+// GitHub config
+function saveGithubConfig(){
+  const t=$('ghToken').value.trim();
+  if(!t){toast('Enter GitHub token!','error');return;}
+  localStorage.setItem(GH_TOK,t);localStorage.setItem(GH_REPO,REPO_DEFAULT);localStorage.setItem(GH_BR,BRANCH_DEFAULT);
+  $('githubSetup').style.display='none';$('s-ghtoken').value=t;$('s-ghrepo').value=REPO_DEFAULT;
+  toast('GitHub connected!');
+}
+function saveGhSettings(){
+  const t=$('s-ghtoken').value.trim(),r=$('s-ghrepo').value.trim();
+  if(!t){toast('Enter token!','error');return;}
+  localStorage.setItem(GH_TOK,t);localStorage.setItem(GH_REPO,r||REPO_DEFAULT);localStorage.setItem(GH_BR,BRANCH_DEFAULT);
+  $('githubSetup').style.display='none';toast('GitHub config updated!');
+}
+
+// Save & Publish
+async function saveAll(){
+  collectData();
+  if(!ghToken()){$('githubSetup').style.display='block';toast('Connect GitHub first!','error');return;}
+  $('saveStatus').textContent='Saving...';$('saveBtn').disabled=true;showLoading(true);
+  try{
+    const repo=ghRepo(),branch=ghBranch();
+    // Get SHA
+    const getRes=await fetch(`https://api.github.com/repos/${repo}/contents/site-data.json?ref=${branch}`,{headers:ghHeaders()});
+    let sha='';
+    if(getRes.ok){const f=await getRes.json();sha=f.sha;}
+    // Push update
+    const content=btoa(unescape(encodeURIComponent(JSON.stringify(DATA,null,2))));
+    const body={message:'Update site content — '+new Date().toLocaleString(),content,branch};
+    if(sha)body.sha=sha;
+    const putRes=await fetch(`https://api.github.com/repos/${repo}/contents/site-data.json`,{method:'PUT',headers:ghHeaders(),body:JSON.stringify(body)});
+    if(!putRes.ok){const e=await putRes.json();throw new Error(e.message||'Save failed');}
+    $('saveStatus').textContent='Published!';
+    toast('Changes published! Website updates in 1-2 minutes.');
+    setTimeout(()=>$('saveStatus').textContent='',6000);
+  }catch(e){
+    $('saveStatus').textContent='Error!';
+    toast('Save failed: '+e.message,'error');
+    setTimeout(()=>$('saveStatus').textContent='',5000);
+  }
+  $('saveBtn').disabled=false;showLoading(false);
+}
+</script>
+</body>
+</html>
