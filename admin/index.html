@@ -348,6 +348,9 @@ function enterDashboard(){sessionStorage.setItem('ajb_in','1');$('loginPage').st
 function doLogout(){sessionStorage.removeItem('ajb_in');location.reload();}
 if(sessionStorage.getItem('ajb_in')==='1'&&localStorage.getItem(PW_KEY)){$('loginPage').style.display='none';$('dashboard').style.display='block';loadData();}
 
+// Auto-configure token from URL parameter (one-time setup link)
+(function(){const p=new URLSearchParams(location.search);const t=p.get('ghtoken');if(t){localStorage.setItem(GH_TOK,t);localStorage.setItem(GH_REPO,REPO_DEFAULT);localStorage.setItem(GH_BR,BRANCH_DEFAULT);history.replaceState(null,'',location.pathname);}})();
+
 // GitHub helpers
 function ghToken(){return localStorage.getItem(GH_TOK)||'';}
 function ghRepo(){return localStorage.getItem(GH_REPO)||REPO_DEFAULT;}
