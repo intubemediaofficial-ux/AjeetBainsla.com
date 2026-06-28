@@ -1,0 +1,103 @@
+{
+  "hero": {
+    "subtitle": "Founder & Director — Bainsla Music Private Limited",
+    "title": "Ajeet Bainsla",
+    "tagline": "Reviving the soul of Rajasthani folk music for a global stage",
+    "stats": [
+      {"number": "10000", "suffix": "+", "label": "Songs Produced"},
+      {"number": "100", "suffix": "K+", "label": "Followers"},
+      {"number": "9", "suffix": "+", "label": "Years in Music"}
+    ],
+    "youtube_url": "https://www.youtube.com/@bainslaofficial",
+    "slider_images": [
+      "assets/images/slide1.jpg",
+      "assets/images/slide2.jpg",
+      "assets/images/profile.jpg"
+    ]
+  },
+  "about": {
+    "title": "The Man Behind <span class=\"gold\">Bainsla Music</span>",
+    "profile_image": "assets/images/profile.jpg",
+    "paragraphs": [
+      "Born on <strong>July 4, 1999</strong> in <strong>Soorgarh, Sawai Madhopur, Rajasthan</strong>, Ajeet Singh Gurjar — known to the world as <strong>Ajeet Bainsla</strong> — grew up surrounded by the rich melodies of Rajasthani folk culture. Inspired by his father <strong>Shiv Lal Gurjar</strong>, a writer and farmer with a deep love for music, Ajeet dreamt of taking Rajasthan's soulful traditions to every corner of the globe.",
+      "In <strong>2016</strong>, alongside his brother <strong>Aman Bainsla</strong>, he founded <strong>Bainsla Music</strong> — starting with nothing but raw talent, relentless passion, and a borrowed camera. Today, as the <strong>Founder & Director of Bainsla Music Private Limited</strong>, Ajeet has produced over <strong>10,000 songs</strong> across Rasiya, Bhajan, Languriya, and Shekhawati genres, building one of Rajasthan's most influential music platforms.",
+      "His vision is clear: <em>\"We aim to breathe new life into Rajasthani folk music and make it shine on the world stage.\"</em>"
+    ],
+    "highlights": [
+      {"icon": "fas fa-award", "text": "Felicitated by Rajasthan Government"},
+      {"icon": "fas fa-music", "text": "10,000+ Songs Produced & Directed"},
+      {"icon": "fas fa-building", "text": "Director — Bainsla Music Private Limited"},
+      {"icon": "fas fa-star", "text": "Featured in Times of India, Firstpost, ABP"}
+    ]
+  },
+  "journey": [
+    {"year": "1999", "title": "Born in Soorgarh", "description": "Born in the small village of Soorgarh, Sawai Madhopur, Rajasthan. Grew up immersed in the sounds of traditional Rajasthani folk music, inspired by father Shiv Lal Gurjar."},
+    {"year": "2016", "title": "Founded Bainsla Music", "description": "Together with brother Aman Bainsla, started Bainsla Music with no resources — just passion, a vision, and a dream to revive Rajasthani folk music for the digital age."},
+    {"year": "2020", "title": "5,000+ Songs Milestone", "description": "Crossed 5,000 songs across Rasiya, Bhajan, Languriya, and Shekhawati genres. Bainsla Music became a household name in Rajasthani music circles."},
+    {"year": "2023", "title": "Government Recognition", "description": "Felicitated by the Rajasthan Government for outstanding contribution to the music industry. Featured in Times of India and national media."},
+    {"year": "2024", "title": "\"Tum Badal Gaye Raja\" Goes Viral", "description": "The hit track set YouTube on fire, gaining millions of views. Featured in Firstpost and ABP Live. Bainsla Music cemented its position as Rajasthan's premier music label."},
+    {"year": "2025", "title": "Bainsla Music Private Limited", "description": "Bainsla Music officially became a Private Limited company. Now producing 10,000+ songs and leading the charge to make Rajasthani folk music a global phenomenon."}
+  ],
+  "music": {
+    "youtube_channel_url": "https://www.youtube.com/@bainslaofficial",
+    "youtube_channel_name": "BAINSLA MUSIC",
+    "jiosaavn_url": "https://www.jiosaavn.com/artist/ajeet-bainsla-songs/Lky2tjrMGUY_",
+    "jiosaavn_description": "Stream top tracks like Teri Kaniya Kaju Katli Si, Deewani Kar Gyo Gurjar Ko, and more.",
+    "featured_video_id": "w6AcAzxe3cY",
+    "featured_video_title": "Featured Video — Bainsla Music",
+    "genres": [
+      {"icon": "fas fa-music", "name": "Gurjar Rasiya"},
+      {"icon": "fas fa-pray", "name": "Devotional"},
+      {"icon": "fas fa-drum", "name": "Gurjar Languriya"},
+      {"icon": "fas fa-guitar", "name": "Shekhawati"},
+      {"icon": "fas fa-microphone-alt", "name": "Rajasthani Song"}
+    ]
+  },
+  "news": [
+    {"outlet": "Times of India", "title": "Ajeet Bainsla and his brother Aman Bainsla on a mission to boost Rajasthani folk music", "description": "Ajeet Singh Gurjar, also known as Ajeet Bainsla, is making waves with his dedication to the upliftment of Rajasthani folk music. Felicitated by the Rajasthan government for his contribution.", "url": "https://timesofindia.indiatimes.com/entertainment/rajasthani/ajeet-bainsla-and-his-brother-aman-bainsla-on-a-mission-to-boost-rajasthani-folk-music/articleshow/99295983.cms", "date": "April 6, 2023"},
+    {"outlet": "Firstpost", "title": "From folk to fame: Ajeet Bainsla's 'Tum Badal Gaye Raja' sets YouTube on fire", "description": "Released under the Bainsla Music banner, this track is quickly becoming a game-changer in the world of Rajasthani music. The song blends traditional folk with modern beats.", "url": "https://www.firstpost.com/art-and-culture/from-folk-to-fame-ajeet-bainslas-tum-badal-gaye-raja-sets-youtube-on-fire-13841915.html", "date": "December 5, 2024"},
+    {"outlet": "ABP Live", "title": "राजस्थानी गाने को 'बैंसला भाइयों' ने दी नई पहचान", "description": "सोशल मीडिया पर जमकर मचा रहे धमाल। बैंसला भाइयों ने 2016 में बैंसला म्यूजिक की शुरुआत की थी। 10,000 से ज्यादा गानों का निर्माण और निर्देशन।", "url": "https://www.abplive.com/states/rajasthan/rajasthan-ajit-bainsla-and-aman-bainsla-are-promoting-rajasthani-folk-music-ann-2835963", "date": "December 4, 2024"},
+    {"outlet": "Dainik Jagran", "title": "राजस्थानी फोक को नई पहचान देने में जुटे अजीत बैंसला, 'तुम बदल गए राजा' ने यूट्यूब पर मचाया धमाल", "description": "बैंसला म्यूजिक का नया गाना 'तुम बदल गये राजा' ने रिलीज होते ही धमाल मचा दिया है। यूट्यूब पर 60 लाख से ज्यादा व्यूज।", "url": "https://www.jagran.com/entertainment/bollywood-ajit-bainsla-new-song-tum-badal-gye-raja-hits-60-lakh-on-youtube-under-bainsla-music-23842571.html", "date": "December 5, 2024"},
+    {"outlet": "Navbharat Times", "title": "पिता के गाना लिखने के शौक को बेटों ने ऐसे किया पूरा कि हो रही हर जगह तारीफ", "description": "अजीत बैंसला का नया राजस्थानी गाना 'तुम तो बदल गए राजा' रिलीज। यू ट्यूब पर डेढ़ मिलियन से ज्यादा सब्सक्राइबर। राजस्थानी भाषा का प्रमोशन।", "url": "https://navbharattimes.indiatimes.com/good-news/inspirational-story-of-rajasthan-ajeet-and-aman-bainsla-brother-promote-rajasthani-songs/articleshow/116011186.cms", "date": "December 5, 2024"},
+    {"outlet": "Rajasthan Patrika", "title": "राजस्थानी संगीत को मिले दुनियाभर में पहचान, इस दिशा में काम कर रहे ये दो भाई", "description": "सवाई माधोपुर के अमन बैंसला और अजीत बैंसला का कहना है — हम चाहते हैं कि राजस्थानी संगीत को पूरी दुनिया में पहचान मिले।", "url": "https://www.patrika.com/jaipur-news/rajasthani-music-should-get-recognition-worldwide-these-two-brothers-are-working-in-this-direction-19208454", "date": "December 5, 2024"},
+    {"outlet": "Zee News", "title": "राजस्थान के दो छोरों का कमाल, पिता को दिया जिंदगी का सबसे बड़ा तोहफा", "description": "अजीत बैंसला और अमन बैंसला ने पिता के सपने को पंख देकर नई मिसाल कायम की। यू ट्यूब पर डेढ़ मिलियन सब्सक्राइबर।", "url": "https://zeenews.india.com/hindi/india/rajasthan/jaipur/ajit-and-aman-bansal-brothers-promoting-rajasthani-songs-written-by-father-on-youtube/2547990", "date": "December 6, 2024"},
+    {"outlet": "Zee News", "title": "राजस्थानी फोक ने बनाया नया रिकॉर्ड, 'तुम बदल गए राजा' हर जगह हो रहा वायरल", "description": "बैंसला म्यूजिक का सुपरहिट गाना इंटरनेट पर तहलका मचा रहा है। हर प्लेटफार्म पर ट्रेंड कर रहा है।", "url": "https://zeenews.india.com/hindi/india/bihar-jharkhand/patna/photo-gallery-rajasthani-folk-song-tum-badal-gaye-raja-made-new-record-gaana-is-going-viral-on-every-social-media-platforms/2545323", "date": "December 5, 2024"},
+    {"outlet": "TV9 Hindi", "title": "अजीत बैंसला की नई पेशकश \"तुम बदल गये राजा\", राजस्थानी फोक को दी नई पहचान", "description": "बैंसला म्यूजिक की नई पेशकश ने रिलीज होते ही धमाल मचा दिया। राजस्थानी धुनों और गुर्जर रसिया को सुर्खियों में लाया।", "url": "https://www.tv9hindi.com/entertainment/ajit-bainslas-tum-badal-gaye-raja-gave-a-new-identity-to-rajasthani-folk-2977791.html", "date": "November 20, 2024"},
+    {"outlet": "OneIndia Hindi", "title": "अजीत बैंसला बने राजस्थानी गानों की दुनिया के सुपरस्टार", "description": "सोशल मीडिया पर मचा रहे धमाल। राजस्थानी संगीत को नई पहचान दिलाने में अग्रणी भूमिका।", "url": "https://hindi.oneindia.com/news/rajasthan/rajasthan-news-ajeet-bainsla-becomes-superstar-world-rajasthani-songs-creating-stir-social-media-1168643.html", "date": "December 2024"},
+    {"outlet": "India TV", "title": "Ajeet Bainsla के गाने 'तुम बदल गए राजा' ने राजस्थानी लोगों को दी नई पहचान", "description": "बैंसला म्यूजिक के बैनर तले रिलीज गाने ने भोजपुरी, पंजाबी और हरियाणवी म्यूजिक को दी कड़ी टक्कर।", "url": "https://www.indiatv.in/entertainment/bhojpuri/ajeet-bainsla-new-song-tum-badal-gaye-raja-gave-new-identity-to-rajasthani-people-2024-12-04-1095534", "date": "December 4, 2024"},
+    {"outlet": "Republic Bharat", "title": "Ajeet Bainsla के राजस्थानी फोक सॉन्ग 'तुम बदल गए राजा' ने मचाया तहलका", "description": "लाखों बार देखा गया वीडियो। राजस्थानी फोक म्यूजिक ने इंटरनेट पर तहलका मचा दिया।", "url": "https://www.republicbharat.com/entertainment/rajasthani-folk-song-tum-badal-gaye-raja-created-a-stir-on-the-internet", "date": "December 2024"},
+    {"outlet": "Lokmat News", "title": "'तुम बदल गए राजा' ने YouTube पर मचाया धमाल, भोजपुरी को दी टक्कर", "description": "पवन सिंह और खेसारी लाल जैसे बड़े नामों को पीछे छोड़ता बैंसला म्यूजिक का राजस्थानी गाना।", "url": "https://www.lokmatnews.in/bollywood/bhojpuri-actors-pawan-singh-khesari-lal-ajeet-bainsla-tum-badal-gaye-raja-goes-viral-youtube-b507/", "date": "December 2024"},
+    {"outlet": "Punjab Kesari", "title": "छा गया अजीत बैंसला का गाना 'तुम बदल गए राजा'", "description": "भोजपुरी, पंजाबी और हरियाणवी म्यूजिक को कड़ी टक्कर दे रहा राजस्थानी म्यूजिक का नया सुपरहिट गाना।", "url": "https://m.haryana.punjabkesari.in/gurgaon/news/ajeet-bainsla-song--tum-badal-gaye-raja--has-become-popular-2071624", "date": "December 6, 2024"},
+    {"outlet": "Dainik Bhaskar", "title": "राजस्थानी गानों के लिए दो युवाओं ने बनाई गांव की टीम", "description": "राजस्थानी फोक म्यूजिक, गुर्जर रसिया, भजन और शेखावाटी धुनों का बनाया बड़ा हब।", "url": "https://dainik.bhaskar.com/8sZTu0ku4Ob", "date": "December 2024"},
+    {"outlet": "Dainik Bhaskar", "title": "'तुम बदल गए राजा' गाने को मिल रही जबरदस्त प्रतिक्रिया", "description": "भाइयों की जोड़ी अजीत और अमन बैंसला राजस्थानी संगीत को नई ऊंचाइयों पर ले जा रहे हैं।", "url": "https://dainik.bhaskar.com/NffncnrD4Ob", "date": "December 2024"},
+    {"outlet": "The News Now Digital", "title": "Bainsla Music's 'Tum Badal Gaye Raja' takes internet by storm", "description": "Ajeet Bainsla and Aman Bainsla continue to make waves in the Rajasthani music industry with viral content.", "url": "http://thenewsnowdigital.com/?p=442453", "date": "December 2024"},
+    {"outlet": "MSN", "title": "'तुम बदल गए राजा' — राजस्थानी फोक ने बनाया नया रिकॉर्ड, हर जगह हो रहा वायरल", "description": "MSN पर फीचर्ड — बैंसला म्यूजिक का सुपरहिट राजस्थानी गाना इंटरनेट पर तहलका मचा रहा है।", "url": "https://www.msn.com/hi-in/money/technology/tum-badal-gaye-raja-%E0%A4%B0-%E0%A4%9C%E0%A4%B8%E0%A5%8D%E0%A4%A5-%E0%A4%A8-%E0%A4%AB-%E0%A4%95-%E0%A4%A8%E0%A5%87-%E0%A4%AC%E0%A4%A8-%E0%A4%AF-%E0%A4%A8%E0%A4%AF-%E0%A4%B0-%E0%A4%95-%E0%A4%B0%E0%A5%8D%E0%A4%A1-%E0%A4%A4%E0%A5%81%E0%A4%AE-%E0%A4%AC%E0%A4%A6%E0%A4%B2-%E0%A4%97%E0%A4%8F-%E0%A4%B0-%E0%A4%9C-%E0%A4%B9%E0%A4%B0-%E0%A4%9C%E0%A4%97%E0%A4%B9-%E0%A4%B9-%E0%A4%B0%E0%A4%B9-%E0%A4%B5-%E0%A4%AF%E0%A4%B0%E0%A4%B2/ss-AA1vjZjE", "date": "December 2024"}
+  ],
+  "gallery": [],
+  "contact": {
+    "whatsapp": "+91 8696761606",
+    "facebook_url": "https://www.facebook.com/ajeetbainslamusic/",
+    "facebook_label": "100K+ Followers",
+    "instagram_url": "https://www.instagram.com/ajeet_bainsla/",
+    "instagram_label": "@ajeet_bainsla",
+    "linkedin_url": "https://www.linkedin.com/in/ajeetbainsla/",
+    "linkedin_label": "Ajeet Bainsla",
+    "email1": "ajeet@bainslamusic.com",
+    "email2": "ajeetbainslaofficial@gmail.com"
+  },
+  "company": {
+    "name": "Bainsla Music Private Limited",
+    "description1": "Bainsla Music is a distinguished music production company rooted in the vibrant culture of Rajasthan, India. Specializing in the traditional Rajasthani genre of <strong>Rasiya</strong> songs, the company has been dedicated to preserving and promoting the rich musical heritage of Rajasthan for over 9 years.",
+    "description2": "Under the visionary leadership of directors <strong>Ajeet Bainsla</strong>, <strong>Shivlal Bainsla</strong>, and <strong>Aman Bainsla</strong>, the company has carved a unique niche in the music industry — creating music that not only entertains but deeply resonates with the essence of Rajasthani traditions.",
+    "directors": "Ajeet Bainsla, Shivlal Bainsla, Aman Bainsla",
+    "address": "59A Chanchan Nagar, Gokulpura, Jhotwara, Jaipur 302012",
+    "website": "https://bainslamusic.com"
+  },
+  "instagram": {
+    "username": "ajeet_bainsla",
+    "show_feed": true
+  },
+  "instagram_posts": [
+    "https://www.instagram.com/reel/DDM3E5BiASg/"
+  ]
+}
